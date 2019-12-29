@@ -9,7 +9,7 @@ jobs:
               with:
                   fetch-depth: 1
             - name: Run local action
-              uses: ./.github/actions/prettier
+              uses: ./.github/actions/local-action
     test:
         runs-on: ubuntu-latest
         steps:
