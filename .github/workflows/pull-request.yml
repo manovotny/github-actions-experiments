@@ -1,6 +1,15 @@
 name: pull-request
 on: pull_request
 jobs:
+    local-action:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v1
+              with:
+                  fetch-depth: 1
+            - name: Run local action
+              uses: ./.github/actions/prettier
     test:
         runs-on: ubuntu-latest
         steps:

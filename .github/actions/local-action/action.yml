@@ -1,0 +1,5 @@
+name: 'Local Action'
+description: 'An example of a custom, unpublished, local GitHub Action running within a project repository.'
+runs:
+    using: 'node12'
+    main: 'dist/index.js'
