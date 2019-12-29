@@ -1,0 +1,50 @@
+{
+    "name": "github-actions-experiments",
+    "description": "A repo to mess around with GitHub Actions experiments. 🧪",
+    "version": "0.0.0",
+    "author": {
+        "name": "Michael Novotny",
+        "email": "manovotny@gmail.com",
+        "url": "https://manovotny.com"
+    },
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/manovotny/github-actions-experiments.git"
+    },
+    "keywords": [
+        "github",
+        "actions",
+        "experiments"
+    ],
+    "engines": {
+        "node": ">=8.6.0",
+        "yarn": ">=1.0.0"
+    },
+    "main": "index.js",
+    "scripts": {
+        "lint": "eslint . --ext .js --ext .json",
+        "prettier": "prettier --write \"**/*.{js,json,md,yml}\"",
+        "prettier:check": "prettier --check \"**/*.{js,json,md,yml}\"",
+        "test": "yarn lint && yarn prettier:check"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "*.{js,json,md,yml}": [
+            "prettier --write",
+            "git add"
+        ]
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "eslint": "6.2.1",
+        "eslint-config-get-off-my-lawn": "5.0.1",
+        "husky": "3.0.4",
+        "lint-staged": "9.2.3",
+        "prettier": "1.18.2"
+    }
+}

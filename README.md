@@ -1,2 +1,3 @@
 # github-actions-experiments
-A repo to mess around with GitHub Actions.
+
+A repo to mess around with GitHub Actions experiments. 🧪
