@@ -27,10 +27,10 @@
         "build": "ncc build index.js"
     },
     "dependencies": {
-        "@actions/core": "1.2.0",
-        "@actions/github": "2.0.0"
+        "@actions/core": "1.2.6",
+        "@actions/github": "4.0.0"
     },
     "devDependencies": {
-        "@zeit/ncc": "0.20.5"
+        "@vercel/ncc": "0.25.1"
     }
 }
