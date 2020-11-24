@@ -1,0 +1,36 @@
+{
+    "name": "local-action",
+    "description": "An example of a custom, unpublished, local GitHub Action running within a project repository.",
+    "version": "0.0.0",
+    "author": {
+        "name": "Michael Novotny",
+        "email": "manovotny@gmail.com",
+        "url": "https://manovotny.com"
+    },
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/manovotny/github-actions-experiments.git"
+    },
+    "keywords": [
+        "action",
+        "actions",
+        "github",
+        "local"
+    ],
+    "engines": {
+        "node": ">=8.6.0",
+        "yarn": ">=1.0.0"
+    },
+    "main": "index.js",
+    "scripts": {
+        "build": "ncc build index.js"
+    },
+    "dependencies": {
+        "@actions/core": "1.2.6",
+        "@actions/github": "4.0.0"
+    },
+    "devDependencies": {
+        "@vercel/ncc": "0.25.1"
+    }
+}
