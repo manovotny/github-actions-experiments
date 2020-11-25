@@ -4,6 +4,10 @@ jobs:
     local-action:
         runs-on: ubuntu-latest
         steps:
+            - name: Cancel running workflows
+              uses: styfle/cancel-workflow-action@0.6.0
+              with:
+                  access_token: ${{ github.token }}
             - name: Checkout
               uses: actions/checkout@v1
               with:
@@ -13,6 +17,10 @@ jobs:
     test:
         runs-on: ubuntu-latest
         steps:
+            - name: Cancel running workflows
+              uses: styfle/cancel-workflow-action@0.6.0
+              with:
+                  access_token: ${{ github.token }}
             - name: Checkout
               uses: actions/checkout@v1
               with:
