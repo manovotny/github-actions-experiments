@@ -1,5 +1,7 @@
 name: release
-on: push
+on:
+    release:
+        types: [created]
 jobs:
     build:
         runs-on: ubuntu-latest
@@ -10,8 +12,8 @@ jobs:
                   access_token: ${{ github.token }}
             - name: Checkout repo
               uses: actions/checkout@v2
-              # with:
-              # ref: ${{ github.event.release.target_commitish }}
+              with:
+                  ref: ${{ github.event.release.target_commitish }}
             # - name: Read node version
             #   id: nvm
             #   run: echo "::set-output name=version::$(cat .nvmrc)"
@@ -29,11 +31,12 @@ jobs:
             #   if: steps.cache-node-modules.outputs.cache-hit != 'true'
             #   run: yarn install --frozen-lockfile
             - name: Read package.json version
-              id: version
               uses: ashley-taylor/read-json-property-action@v1.0
+              id: version
               with:
                   path: package.json
                   property: version
-            - name: TESTING
+            - name: TAG
+              run: echo ${{ github.event.release.tag_name }}
+            - name: VERSION
               run: echo ${{ steps.version.outputs.value }}
-              # github.event.release.tag_name
