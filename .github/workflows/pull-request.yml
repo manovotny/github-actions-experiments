@@ -34,7 +34,7 @@ jobs:
               with:
                   path: '**/node_modules'
                   key: dependencies-v1-${{ hashFiles('**/yarn.lock') }}
-            - name: Instal dependencies
+            - name: Install dependencies
               if: steps.cache-node-modules.outputs.cache-hit != 'true'
               run: yarn install --frozen-lockfile
             - name: Run tests
