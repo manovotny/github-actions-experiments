@@ -32,4 +32,4 @@ jobs:
               with:
                   path: ./package.json
             - name: TESTING
-              run: yarn publish
+              run: echo steps.package.outputs.content.version
