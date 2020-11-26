@@ -28,11 +28,12 @@ jobs:
             # - name: Instal dependencies
             #   if: steps.cache-node-modules.outputs.cache-hit != 'true'
             #   run: yarn install --frozen-lockfile
-            - name: Read package.json
-              id: package
-              uses: juliangruber/read-file-action@v1
+            - name: Read package.json version
+              id: version
+              uses: notiz-dev/github-action-json-property@0.1.0
               with:
-                  path: ./package.json
+                  path: 'package.json'
+                  prop_path: 'version'
             - name: TESTING
-              run: echo ${{ toJSON(steps.package.outputs.content) }}
+              run: echo ${{ steps.version.outputs.prop }}
               # github.event.release.tag_name
