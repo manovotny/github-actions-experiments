@@ -1,18 +1,7 @@
-name: pull-request
-on: pull_request
+name: release
+on: push
 jobs:
-    local-action:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Cancel running workflows
-              uses: styfle/cancel-workflow-action@0.6.0
-              with:
-                  access_token: ${{ github.token }}
-            - name: Checkout repo
-              uses: actions/checkout@v2
-            - name: Run local action
-              uses: ./.github/actions/local-action
-    test:
+    build:
         runs-on: ubuntu-latest
         steps:
             - name: Cancel running workflows
@@ -37,5 +26,10 @@ jobs:
             - name: Instal dependencies
               if: steps.cache-node-modules.outputs.cache-hit != 'true'
               run: yarn install --frozen-lockfile
-            - name: Run tests
-              run: yarn test
+            - name: Read package.json
+              id: package
+              uses: juliangruber/read-file-action@v1
+              with:
+                  path: ./package.json
+            - name: TESTING
+              run: yarn publish

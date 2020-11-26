@@ -26,6 +26,7 @@
         "lint": "eslint . --ext .js --ext .json",
         "prettier": "prettier --write \"**/*.{js,json,md,yml}\"",
         "prettier:check": "prettier --check \"**/*.{js,json,md,yml}\"",
+        "start": "node index.js",
         "test": "yarn lint && yarn prettier:check"
     },
     "husky": {
