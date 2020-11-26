@@ -10,26 +10,29 @@ jobs:
                   access_token: ${{ github.token }}
             - name: Checkout repo
               uses: actions/checkout@v2
-            - name: Read node version
-              id: nvm
-              run: echo "::set-output name=version::$(cat .nvmrc)"
-            - name: Set node version
-              uses: actions/setup-node@v1
-              with:
-                  node-version: ${{ steps.nvm.outputs.version }}
-            - name: Cache node_modules
-              uses: actions/cache@v2
-              id: cache-node-modules
-              with:
-                  path: '**/node_modules'
-                  key: dependencies-v1-${{ hashFiles('**/yarn.lock') }}
-            - name: Instal dependencies
-              if: steps.cache-node-modules.outputs.cache-hit != 'true'
-              run: yarn install --frozen-lockfile
+              # with:
+              # ref: ${{ github.event.release.target_commitish }}
+            # - name: Read node version
+            #   id: nvm
+            #   run: echo "::set-output name=version::$(cat .nvmrc)"
+            # - name: Set node version
+            #   uses: actions/setup-node@v1
+            #   with:
+            #       node-version: ${{ steps.nvm.outputs.version }}
+            # - name: Cache node_modules
+            #   uses: actions/cache@v2
+            #   id: cache-node-modules
+            #   with:
+            #       path: '**/node_modules'
+            #       key: dependencies-v1-${{ hashFiles('**/yarn.lock') }}
+            # - name: Instal dependencies
+            #   if: steps.cache-node-modules.outputs.cache-hit != 'true'
+            #   run: yarn install --frozen-lockfile
             - name: Read package.json
               id: package
               uses: juliangruber/read-file-action@v1
               with:
                   path: ./package.json
             - name: TESTING
-              run: echo ${{ steps.package.outputs.content }}
+              run: echo ${{ toJSON(steps.package.outputs.content) }}
+              # github.event.release.tag_name
