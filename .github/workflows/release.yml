@@ -30,10 +30,10 @@ jobs:
             #   run: yarn install --frozen-lockfile
             - name: Read package.json version
               id: version
-              uses: notiz-dev/github-action-json-property@0.1.0
+              uses: ashley-taylor/read-json-property-action@v1.0
               with:
-                  path: 'package.json'
-                  prop_path: 'version'
+                  path: package.json
+                  property: version
             - name: TESTING
-              run: echo ${{ steps.version.outputs.prop }}
+              run: echo ${{ steps.version.outputs.value }}
               # github.event.release.tag_name
