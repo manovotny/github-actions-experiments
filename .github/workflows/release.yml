@@ -32,17 +32,20 @@ jobs:
             #   run: yarn install --frozen-lockfile
             - name: Read package.json version
               uses: ashley-taylor/read-json-property-action@v1.0
-              id: version
+              id: package-json-version
               with:
                   path: package.json
                   property: version
-            - name: TAG
-              run: echo ${{ github.event.release.tag_name }}
-            - name: VERSION
-              run: echo ${{ steps.version.outputs.value }}
+            - name: RELEASE
+              id: release-version
+              run: echo "::set-output name=value::$(GITHUB_REF:11)"
+            - name: PACKAGE.JSON
+              run: echo ${{ steps.package-json-version.outputs.value }}
             - name: SUCCESS
-              if: v${{ steps.version.outputs.value }} == github.event.release.tag_name
+              if: steps.package-json-version.outputs.value == steps.release-version.outputs.value
               run: echo 'SUCCESS!!!'
             - name: FAIL
-              if: v${{ steps.version.outputs.value }} != github.event.release.tag_name
-              run: echo 'FAIL!!!'
+              if: steps.package-json-version.outputs.value != steps.release-version.outputs.value
+              run: |
+                  echo 'FAIL!!!'
+                  exit 1
