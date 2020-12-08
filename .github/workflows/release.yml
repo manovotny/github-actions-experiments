@@ -38,7 +38,7 @@ jobs:
                   property: version
             - name: RELEASE
               id: release-version
-              run: echo "::set-output name=value::$(GITHUB_REF:11)"
+              run: echo "::set-output name=value::$(echo "${GITHUB_REF:11}")"
             - name: PACKAGE.JSON
               run: echo ${{ steps.package-json-version.outputs.value }}
             - name: SUCCESS
