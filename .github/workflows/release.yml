@@ -3,13 +3,9 @@ on:
     release:
         types: [created]
 jobs:
-    build:
+    release:
         runs-on: ubuntu-latest
         steps:
-            - name: Cancel running workflows
-              uses: styfle/cancel-workflow-action@0.6.0
-              with:
-                  access_token: ${{ github.token }}
             - name: Checkout repo
               uses: actions/checkout@v2
               with:
@@ -36,18 +32,13 @@ jobs:
               with:
                   path: package.json
                   property: version
-            - name: GET RELEASE
+            - name: Read release version
               id: release-version
               run: echo "::set-output name=value::$(echo "${GITHUB_REF:11}")"
-            - name: RELEASE
-              run: echo ${{ steps.release-version.outputs.value }}
-            - name: PACKAGE.JSON
-              run: echo ${{ steps.package-json-version.outputs.value }}
-            - name: SUCCESS
-              if: steps.package-json-version.outputs.value == steps.release-version.outputs.value
-              run: echo 'SUCCESS!!!'
-            - name: FAIL
+            - name: Check release matches package.json version
               if: steps.package-json-version.outputs.value != steps.release-version.outputs.value
               run: |
-                  echo 'FAIL!!!'
+                  echo 'Release version does not match package.json version.'
+                  echo 'Release version: ${ steps.release-version.outputs.value }'
+                  echo 'Package.json version: ${ steps.package-json-version.outputs.value }'
                   exit 1
