@@ -34,7 +34,7 @@ jobs:
                   property: version
             - name: Read release version
               id: release-version
-              run: echo "::set-output name=value::$(echo "${GITHUB_REF}")"
+              run: echo "::set-output name=value::$(echo "${GITHUB_REF:1}")"
             - name: Check release matches package.json version
               if: steps.package-json-version.outputs.value != steps.release-version.outputs.value
               env:
