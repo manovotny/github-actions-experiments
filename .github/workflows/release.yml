@@ -39,6 +39,6 @@ jobs:
               if: steps.package-json-version.outputs.value != steps.release-version.outputs.value
               run: |
                   echo "Release version does not match package.json version."
-                  echo "Release version: ${steps.release-version.outputs.value}"
-                  echo "Package.json version: ${steps.package-json-version.outputs.value}"
+                  echo "Release version: $steps.release-version.outputs.value"
+                  echo "Package.json version: $steps.package-json-version.outputs.value"
                   exit 1
