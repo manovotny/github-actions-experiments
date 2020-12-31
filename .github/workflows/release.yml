@@ -37,8 +37,11 @@ jobs:
               run: echo "::set-output name=value::$(echo "${GITHUB_REF:11}")"
             - name: Check release matches package.json version
               if: steps.package-json-version.outputs.value != steps.release-version.outputs.value
+              env:
+                  PACKAGE_JSON_VERSION: steps.package-json-version.outputs.value
+                  RELEASE_VERSION: steps.release-version.outputs.value
               run: |
                   echo "Release version does not match package.json version."
-                  echo "Release version: $steps.release-version.outputs.value"
-                  echo "Package.json version: $steps.package-json-version.outputs.value"
+                  echo "Release version: $RELEASE_VERSION"
+                  echo "Package.json version: $PACKAGE_JSON_VERSION"
                   exit 1
