@@ -38,8 +38,8 @@ jobs:
             - name: Check release matches package.json version
               if: steps.package-json-version.outputs.value != steps.release-version.outputs.value
               env:
-                  PACKAGE_JSON_VERSION: ${steps.package-json-version.outputs.value}
-                  RELEASE_VERSION: ${steps.release-version.outputs.value}
+                  PACKAGE_JSON_VERSION: ${{steps.package-json-version.outputs.value}}
+                  RELEASE_VERSION: ${{steps.release-version.outputs.value}}
               run: |
                   echo Release version does not match package.json version.
                   echo Release version: $RELEASE_VERSION
