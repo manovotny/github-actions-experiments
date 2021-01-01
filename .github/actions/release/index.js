@@ -13,6 +13,7 @@ const semver = require('semver');
 
         if (!releaseVersion.startsWith('v')) {
             core.setFailed('Release tag does not start with `v`, ie. `v1.2.3`.');
+            return;
         }
 
         if (releaseVersionWithoutV !== packageJsonVersion) {
@@ -21,10 +22,12 @@ const semver = require('semver');
                 Release version: ${releaseVersionWithoutV}
                 Package.json version: ${packageJsonVersion}
             `);
+            return;
         }
 
         if (!semver.valid(releaseVersionWithoutV)) {
             core.setFailed(`Release and package.json versions are not valid semver.`);
+            return;
         }
 
         const semverPrerelease = semver.prerelease(releaseVersionWithoutV);
@@ -34,12 +37,14 @@ const semver = require('semver');
             core.setFailed(
                 'Release in GitHub is marked as `pre-release`, but release tag and package.json versions do not follow pre-release format, ie. `1.2.3-beta.1'
             );
+            return;
         }
 
         if (!releaseIsPrerelease && semverPrerelease !== null) {
             core.setFailed(
                 'Release tag and package.json versions follow pre-release format, ie. `1.2.3-beta.1, but release in GitHub is not marked as `pre-release`.'
             );
+            return;
         }
 
         if (releaseIsPrerelease && semverPrerelease !== null) {
