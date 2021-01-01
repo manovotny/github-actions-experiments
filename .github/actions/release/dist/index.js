@@ -59,7 +59,6 @@ const semver = __webpack_require__(1383);
         }
 
         console.log('PUBLISH COMMAND', publishCommand);
-        console.log('BUILD COMMAND', buildCommand);
         core.setOutput('publish_command', publishCommand);
     } catch (error) {
         core.setFailed(error.message);
