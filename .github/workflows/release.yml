@@ -32,14 +32,11 @@ jobs:
               with:
                   path: package.json
                   property: version
-            - name: Read release version
-              id: release-version
-              run: echo "::set-output name=value::$(echo "${GITHUB_REF:11}")"
             - name: Check release matches package.json version
-              if: steps.package-json-version.outputs.value != steps.release-version.outputs.value
+              if: steps.package-json-version.outputs.value != github.event.release.tag_name
               env:
                   PACKAGE_JSON_VERSION: ${{steps.package-json-version.outputs.value}}
-                  RELEASE_VERSION: ${{steps.release-version.outputs.value}}
+                  RELEASE_VERSION: ${{github.event.release.tag_name}}
               run: |
                   echo "Release version does not match package.json version."
                   echo "Release version: $RELEASE_VERSION"
