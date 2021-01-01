@@ -3,3 +3,6 @@ description: 'TODO'
 runs:
     using: 'node12'
     main: 'dist/index.js'
+outputs:
+    publish_command:
+        description: 'TODO'

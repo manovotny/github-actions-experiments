@@ -6,11 +6,10 @@ const semver = require('semver');
 
 (async () => {
     try {
-        const {draft, prerelease, tag_name: releaseVersion} = github.context.payload.release;
+        const {prerelease: releaseIsPrerelease, tag_name: releaseVersion} = github.context.payload.release;
         const releaseVersionWithoutV = releaseVersion.substring(1);
         const packageJson = await fs.readJson('./package.json');
         const packageJsonVersion = dotProp.get(packageJson, 'version', undefined);
-        const packageJsonBuildScript = dotProp.get(packageJson, 'scripts.build', undefined);
 
         if (!releaseVersion.startsWith('v')) {
             core.setFailed('Release tag does not start with `v`, ie. `v1.2.3`.');
@@ -25,19 +24,31 @@ const semver = require('semver');
         }
 
         if (!semver.valid(releaseVersionWithoutV)) {
-            core.setFailed(`Release / Package.json version is not valid semver.`);
+            core.setFailed(`Release and package.json versions are not valid semver.`);
         }
 
-        const prereleaseTag = semver.prerelease(releaseVersionWithoutV);
-        let tag = '';
+        const semverPrerelease = semver.prerelease(releaseVersionWithoutV);
+        let publishCommand = `yarn publish --new-version ${releaseVersionWithoutV}`;
 
-        if (prereleaseTag !== null) {
-            tag = ` --tag ${prereleaseTag[0]}`;
+        if (releaseIsPrerelease && semverPrerelease === null) {
+            core.setFailed(
+                'Release in GitHub is marked as `pre-release`, but release tag and package.json versions do not follow pre-release format, ie. `1.2.3-beta.1'
+            );
         }
 
-        const command = `yarn publish --new-version ${releaseVersionWithoutV}${tag}`;
-        console.log('COMMAND', command);
-        core.setOutput('command', command);
+        if (!releaseIsPrerelease && semverPrerelease !== null) {
+            core.setFailed(
+                'Release tag and package.json versions follow pre-release format, ie. `1.2.3-beta.1, but release in GitHub is not marked as `pre-release`.'
+            );
+        }
+
+        if (releaseIsPrerelease && semverPrerelease !== null) {
+            publishCommand += ` --tag ${semverPrerelease[0]}`;
+        }
+
+        console.log('PUBLISH COMMAND', publishCommand);
+        console.log('BUILD COMMAND', buildCommand);
+        core.setOutput('publish_command', publishCommand);
     } catch (error) {
         core.setFailed(error.message);
     }
