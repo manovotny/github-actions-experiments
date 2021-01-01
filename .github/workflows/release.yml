@@ -6,34 +6,36 @@ jobs:
     release:
         runs-on: ubuntu-latest
         steps:
-            - name: Check release tag starts with `v`
-              if: startsWith(github.event.release.tag_name, 'v') == false
-              run: |
-                  echo "Release tag does not start with `v`, ie. `v1.2.3`."
-                  exit 1
-            - name: Checkout repo
-              uses: actions/checkout@v2
-              with:
-                  ref: ${{ github.event.release.target_commitish }}
-            - name: Read package.json version
-              uses: ashley-taylor/read-json-property-action@v1.0
-              id: package-json-version
-              with:
-                  path: package.json
-                  property: version
-            - name: Read release version
-              id: release-version
-              run: echo "::set-output name=value::$(echo "${GITHUB_REF:11}")"
-            - name: Check release matches package.json version
-              if: steps.package-json-version.outputs.value != steps.release-version.outputs.value
-              env:
-                  PACKAGE_JSON_VERSION: ${{ steps.package-json-version.outputs.value }}
-                  RELEASE_VERSION: ${{ steps.release-version.outputs.value }}
-              run: |
-                  echo "Release version does not match package.json version."
-                  echo "Release version: $RELEASE_VERSION"
-                  echo "Package.json version: $PACKAGE_JSON_VERSION"
-                  exit 1
+            - name: Release
+              uses: ./.github/actions/release
+            # - name: Check release tag starts with `v`
+            #   if: startsWith(github.event.release.tag_name, 'v') == false
+            #   run: |
+            #       echo "Release tag does not start with `v`, ie. `v1.2.3`."
+            #       exit 1
+            # - name: Checkout repo
+            #   uses: actions/checkout@v2
+            #   with:
+            #       ref: ${{ github.event.release.target_commitish }}
+            # - name: Read package.json version
+            #   uses: ashley-taylor/read-json-property-action@v1.0
+            #   id: package-json-version
+            #   with:
+            #       path: package.json
+            #       property: version
+            # - name: Read release version
+            #   id: release-version
+            #   run: echo "::set-output name=value::$(echo "${GITHUB_REF:11}")"
+            # - name: Check release matches package.json version
+            #   if: steps.package-json-version.outputs.value != steps.release-version.outputs.value
+            #   env:
+            #       PACKAGE_JSON_VERSION: ${{ steps.package-json-version.outputs.value }}
+            #       RELEASE_VERSION: ${{ steps.release-version.outputs.value }}
+            #   run: |
+            #       echo "Release version does not match package.json version."
+            #       echo "Release version: $RELEASE_VERSION"
+            #       echo "Package.json version: $PACKAGE_JSON_VERSION"
+            #       exit 1
             # - name: Read node version
             #   id: nvm
             #   run: echo "::set-output name=version::$(cat .nvmrc)"
