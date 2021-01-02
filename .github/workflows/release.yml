@@ -48,7 +48,7 @@ jobs:
               run: |
                   echo "Publish command: $PUBLISH_COMMAND"
             # Run build step here, if needed.
-            # - name: Publish
-            #   run: ${{ steps.release.outputs.command }}
-            #   env:
-            #       NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+            - name: Publish
+              run: ${{ steps.release.outputs.command }}
+              env:
+                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
