@@ -42,11 +42,6 @@ jobs:
             - name: Install dependencies
               if: steps.node-modules-cache.outputs.cache-hit != 'true'
               run: yarn install --frozen-lockfile
-            - name: OUTPUT
-              env:
-                  PUBLISH_COMMAND: ${{steps.release.outputs.publish_command}}
-              run: |
-                  echo "Publish command: $PUBLISH_COMMAND"
             # Run build step here, if needed.
             - name: Publish
               run: ${{ steps.release.outputs.command }}
