@@ -6,10 +6,19 @@ const semver = require('semver');
 
 (async () => {
     try {
-        const {prerelease: releaseIsPrerelease, tag_name: releaseVersion} = github.context.payload.release;
+        const {
+            draft: releaseIsDraft,
+            prerelease: releaseIsPrerelease,
+            tag_name: releaseVersion
+        } = github.context.payload.release;
         const releaseVersionWithoutV = releaseVersion.substring(1);
         const packageJson = await fs.readJson('./package.json');
         const packageJsonVersion = dotProp.get(packageJson, 'version', undefined);
+
+        if (releaseIsDraft) {
+            core.setFailed('Release is a draft. Skip publish.');
+            return;
+        }
 
         if (!releaseVersion.startsWith('v')) {
             core.setFailed('Release tag does not start with `v`, ie. `v1.2.3`.');
