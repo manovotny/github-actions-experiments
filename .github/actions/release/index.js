@@ -40,7 +40,7 @@ const semver = require('semver');
         }
 
         const semverPrerelease = semver.prerelease(releaseVersionWithoutV);
-        let publishCommand = `yarn publish --new-version ${releaseVersionWithoutV}`;
+        let tag = '';
 
         if (releaseIsPrerelease && semverPrerelease === null) {
             core.setFailed(
@@ -57,11 +57,13 @@ const semver = require('semver');
         }
 
         if (releaseIsPrerelease && semverPrerelease !== null) {
-            publishCommand += ` --tag ${semverPrerelease[0]}`;
+            tag += semverPrerelease[0];
         }
 
-        console.log('PUBLISH COMMAND', publishCommand);
-        core.setOutput('publish_command', publishCommand);
+        console.log('VERSION', releaseVersionWithoutV);
+        console.log('TAG', tag);
+        core.setOutput('version', releaseVersionWithoutV);
+        core.setOutput('tag', tag);
     } catch (error) {
         core.setFailed(error.message);
     }

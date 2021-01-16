@@ -43,7 +43,15 @@ jobs:
               if: steps.node-modules-cache.outputs.cache-hit != 'true'
               run: yarn install --frozen-lockfile
             # Run build step here, if needed.
-            - name: Publish
-              run: ${{ steps.release.outputs.command }}
+            - name: Validate and extract release information
+              id: release
+            - name: Publish version
+              if: steps.release.outputs.tag == ''
+              run: yarn publish --new-version ${{ steps.release.outputs.version }}
+              env:
+                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+            - name: Publish version with tag
+              if: steps.release.outputs.tag != ''
+              run: yarn publish --new-version ${{ steps.release.outputs.version }} --tag ${{ steps.release.outputs.tag }}
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

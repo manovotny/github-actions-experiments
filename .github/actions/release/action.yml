@@ -4,5 +4,7 @@ runs:
     using: 'node12'
     main: 'dist/index.js'
 outputs:
-    publish_command:
-        description: 'TODO'
+    tag:
+        description: 'Tag to publish (optional)'
+    version:
+        description: 'Version to publish'
