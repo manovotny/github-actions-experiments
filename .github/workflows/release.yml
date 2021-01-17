@@ -10,7 +10,7 @@ jobs:
               uses: actions/checkout@v2
               with:
                   ref: ${{ github.event.release.target_commitish }}
-            - name: Release
+            - name: Validate and extract release information
               id: release
               uses: ./.github/actions/release
             - name: Read node version
@@ -43,9 +43,6 @@ jobs:
               if: steps.node-modules-cache.outputs.cache-hit != 'true'
               run: yarn install --frozen-lockfile
             # Run build step here, if needed.
-            - name: Validate and extract release information
-              id: release
-              uses: ./.github/actions/release
             - name: Publish version
               if: steps.release.outputs.tag == ''
               run: yarn publish --new-version ${{ steps.release.outputs.version }}
