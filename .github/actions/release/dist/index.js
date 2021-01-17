@@ -13,10 +13,19 @@ const semver = __webpack_require__(1383);
 
 (async () => {
     try {
-        const {prerelease: releaseIsPrerelease, tag_name: releaseVersion} = github.context.payload.release;
+        const {
+            draft: releaseIsDraft,
+            prerelease: releaseIsPrerelease,
+            tag_name: releaseVersion
+        } = github.context.payload.release;
         const releaseVersionWithoutV = releaseVersion.substring(1);
         const packageJson = await fs.readJson('./package.json');
         const packageJsonVersion = dotProp.get(packageJson, 'version', undefined);
+
+        if (releaseIsDraft) {
+            core.setFailed('Release is a draft. Skip publish.');
+            return;
+        }
 
         if (!releaseVersion.startsWith('v')) {
             core.setFailed('Release tag does not start with `v`, ie. `v1.2.3`.');
@@ -38,7 +47,7 @@ const semver = __webpack_require__(1383);
         }
 
         const semverPrerelease = semver.prerelease(releaseVersionWithoutV);
-        let publishCommand = `yarn publish --new-version ${releaseVersionWithoutV}`;
+        let tag = '';
 
         if (releaseIsPrerelease && semverPrerelease === null) {
             core.setFailed(
@@ -55,11 +64,13 @@ const semver = __webpack_require__(1383);
         }
 
         if (releaseIsPrerelease && semverPrerelease !== null) {
-            publishCommand += ` --tag ${semverPrerelease[0]}`;
+            tag += semverPrerelease[0];
         }
 
-        console.log('PUBLISH COMMAND', publishCommand);
-        core.setOutput('publish_command', publishCommand);
+        console.log('VERSION', releaseVersionWithoutV);
+        console.log('TAG', tag);
+        core.setOutput('version', releaseVersionWithoutV);
+        core.setOutput('tag', tag);
     } catch (error) {
         core.setFailed(error.message);
     }
