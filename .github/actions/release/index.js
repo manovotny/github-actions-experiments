@@ -60,8 +60,6 @@ const semver = require('semver');
             tag += semverPrerelease[0];
         }
 
-        console.log('VERSION', releaseVersionWithoutV);
-        console.log('TAG', tag);
         core.setOutput('version', releaseVersionWithoutV);
         core.setOutput('tag', tag);
     } catch (error) {
