@@ -45,6 +45,7 @@ jobs:
             # Run build step here, if needed.
             - name: Validate and extract release information
               id: release
+              uses: ./.github/actions/release
             - name: Publish version
               if: steps.release.outputs.tag == ''
               run: yarn publish --new-version ${{ steps.release.outputs.version }}
