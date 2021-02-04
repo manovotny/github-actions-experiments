@@ -1,7 +1,7 @@
 {
     "name": "github-actions-experiments",
     "description": "A repo to mess around with GitHub Actions experiments. 🧪",
-    "version": "0.0.0",
+    "version": "2.0.0",
     "author": {
         "name": "Michael Novotny",
         "email": "manovotny@gmail.com",
@@ -26,6 +26,7 @@
         "lint": "eslint . --ext .js --ext .json",
         "prettier": "prettier --write \"**/*.{js,json,md,yml}\"",
         "prettier:check": "prettier --check \"**/*.{js,json,md,yml}\"",
+        "start": "node index.js",
         "test": "yarn lint && yarn prettier:check"
     },
     "husky": {
