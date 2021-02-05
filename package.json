@@ -1,6 +1,6 @@
 {
     "name": "github-actions-experiments",
-    "description": "A repo to mess around with GitHub Actions experiments. 🧪",
+    "description": "A repo to experiment with GitHub Actions. 🧪",
     "version": "2.0.0",
     "author": {
         "name": "Michael Novotny",
