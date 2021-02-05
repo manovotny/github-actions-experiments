@@ -1,4 +1,4 @@
-name: pull-request
+name: nvm
 on: pull_request
 jobs:
     nvm:

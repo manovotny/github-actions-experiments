@@ -1,4 +1,4 @@
-name: pull-request
+name: local-action
 on: pull_request
 jobs:
     local-action:
