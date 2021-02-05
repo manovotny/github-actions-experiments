@@ -4,7 +4,7 @@
 
 This repository contains snippets / recipes / guides or references to other actions I have found or figured out myself in my own adoption of GitHub Actions. I am sharing them here in case someone else finds them useful too.
 
-Examples are isolated to keep them clear and concise, but you can totally use them together into a single workflow.
+Examples are isolated to keep them clear and concise, but you can [use them together into a single workflow](/.github/workflows/test.yml).
 
 -   [Cache node_modules](#cache-node_modules)
 -   [Cancel Running Workflows](#cancel-running-workflow)
