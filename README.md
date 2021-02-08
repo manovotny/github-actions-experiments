@@ -9,14 +9,14 @@ Examples are isolated to keep them clear and concise, but you can [use them toge
 You can also [view real results](https://github.com/manovotny/github-actions-experiments/actions) of the actions below, which are setup to run as realtime examples within this respiratory.
 
 -   [Cache node_modules](#cache-node_modules)
--   [Cancel Running Workflows](#cancel-running-workflow)
+-   [Cancel Running Workflows](#cancel-running-workflows)
 -   [GitHub Releases for Automated Package Publishing](#github-releases-for-automated-package-publishing)
 -   [Local Actions](#local-actions)
 -   [Optimize Images](#optimize-images)
--   [Read and Use Node Version from .nvmrc File](#read-and-use-node-version-from-.nvmrc-file)
--   [Read and Use Yarn Version from .yvmrc File](#read-and-use-yarn-version-from-.yvmrc-file)
+-   [Read and Use Node Version from .nvmrc File](#read-and-use-node-version-from-nvmrc-file)
+-   [Read and Use Yarn Version from .yvmrc File](#read-and-use-yarn-version-from-yvmrc-file)
 
-## Caching node_modules
+## Cache node_modules
 
 One of the longest running steps in your GitHub Actions workflow is likely downloading and installing dependencies. Wouldn't it be great if you could skip that and reuse previously installed dependencies if none of the dependencies have changed?!
 
