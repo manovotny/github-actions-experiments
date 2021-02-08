@@ -10,6 +10,7 @@ Examples are isolated to keep them clear and concise, but you can [use them toge
 -   [Cancel Running Workflows](#cancel-running-workflow)
 -   [GitHub Releases for Automated Package Publishing](#github-releases-for-automated-package-publishing)
 -   [Local Actions](#local-actions)
+-   [Optimize Images](#optimize-images)
 -   [Read and Use Node Version from .nvmrc File](#read-and-use-node-version-from-.nvmrc-file)
 -   [Read and Use Yarn Version from .yvmrc File](#read-and-use-yarn-version-from-.yvmrc-file)
 
@@ -43,6 +44,14 @@ Fear not! You can write your own GitHub Action, locally within your project's re
 
 -   [Example: Creating a local action within your project repository](/.github/actions/local-action)
 -   [Example: Referencing local action in your workflow](/.github/workflows/local-action.yml)
+
+## Optimize Images
+
+TODO: ADD DESCRIPTION
+
+TODO: ADD LINK TO EXAMPLE PR
+
+[calibreapp/image-actions](https://github.com/marketplace/actions/image-actions)
 
 ## Read and Use Node Version from .nvmrc File
 
