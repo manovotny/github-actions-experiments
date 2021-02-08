@@ -1,0 +1,15 @@
+name: nvm
+on: pull_request
+jobs:
+    nvm:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repo
+              uses: actions/checkout@v2
+            - name: Read node version
+              id: nvm
+              run: echo "::set-output name=version::$(cat .nvmrc)"
+            - name: Set node version
+              uses: actions/setup-node@v1
+              with:
+                  node-version: ${{ steps.nvm.outputs.version }}

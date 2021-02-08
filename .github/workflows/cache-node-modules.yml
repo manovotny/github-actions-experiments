@@ -1,0 +1,26 @@
+name: cache-node-modules
+on: pull_request
+jobs:
+    cache-node-modules:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repo
+              uses: actions/checkout@v2
+            # Looks for changes to the `yarn.lock` file, though it could just
+            # as easily look for changes in `package-lock.json` file, if you
+            # are using npm instead of yarn.
+            #
+            # If `yarn.lock` has changed, it will reinstall dependencies and
+            # cache them for later.
+            #
+            # If `yarn.lock` has not changed, it will just reuse the existing
+            # installed dependencies in `node_modules`.
+            - name: Cache node_modules
+              id: node-modules-cache
+              uses: actions/cache@v2
+              with:
+                  path: '**/node_modules'
+                  key: node-modules-cache-${{ hashFiles('**/yarn.lock') }}
+            - name: Install dependencies
+              if: steps.node-modules-cache.outputs.cache-hit != 'true'
+              run: yarn install --frozen-lockfile

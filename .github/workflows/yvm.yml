@@ -1,0 +1,26 @@
+name: yvm
+on: pull_request
+jobs:
+    yvm:
+        runs-on: ubuntu-latest
+        # When you set the yarn version via `policies set-version`, it will download
+        # that version of yarn into a `.yarn` folder at the root of your project. To
+        # save from downloading a specific version of yarn every time, we'll cache it
+        # and resue it instead. If it detects a new version of yarn, then it will
+        # download and save it for later.
+        steps:
+            - name: Checkout repo
+              uses: actions/checkout@v2
+            - name: Cache yarn version
+              id: yarn-cache
+              uses: actions/cache@v2
+              with:
+                  path: '**/.yarn'
+                  key: yarn-cache-${{ hashFiles('**/.yvmrc') }}
+            - name: Read yarn version
+              id: yvm
+              if: steps.yarn-cache.outputs.cache-hit != 'true'
+              run: echo "::set-output name=version::$(cat .yvmrc)"
+            - name: Set yarn version
+              if: steps.yarn-cache.outputs.cache-hit != 'true'
+              run: yarn policies set-version ${{ steps.yvm.outputs.version }}
