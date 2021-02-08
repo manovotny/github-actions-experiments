@@ -12,7 +12,7 @@ You can also [view real results](https://github.com/manovotny/github-actions-exp
 -   [Cancel Running Workflows](#cancel-running-workflows)
 -   [GitHub Releases for Automated Package Publishing](#github-releases-for-automated-package-publishing)
 -   [Local Actions](#local-actions)
--   [Optimize Images](#optimize-images)
+-   [Image Optimization](#image-optimization)
 -   [Read and Use Node Version from .nvmrc File](#read-and-use-node-version-from-nvmrc-file)
 -   [Read and Use Yarn Version from .yvmrc File](#read-and-use-yarn-version-from-yvmrc-file)
 
@@ -47,13 +47,16 @@ Fear not! You can write your own GitHub Action, locally within your project's re
 -   [Example Code: Creating a local action within your project repository](/.github/actions/local-action)
 -   [Example Code: Referencing local action in your workflow](/.github/workflows/local-action.yml)
 
-## Optimize Images
+## Image Optimization
 
-TODO: ADD DESCRIPTION
+There are [tons](https://www.npmjs.com/search?q=keywords%3Aoptimization%20image) of image optimizion libraries out there, but many of them require manual workflows, custom server middleware, on-the-fly browser compression (ie. not ideal for performance), [cumbersome cross platform build setups with yet more non-JavaScript dependencies](https://github.com/manovotny/manovotny.com/pull/78) (such as [ImageMagic](https://imagemagick.org/index.php), [ImageOptim](https://imageoptim.com/mac), [JPEGMini](https://www.jpegmini.com/), etc.) to get the best image optimization quality.
 
-TODO: ADD LINK TO EXAMPLE PR
+There has to be a better way... And now there is!
 
-[calibreapp/image-actions](https://github.com/marketplace/actions/image-actions)
+The [calibreapp/image-actions](https://github.com/marketplace/actions/image-actions) GitHub Action abstracts all that setup and pain away with a single workflow. Set it and forget it and don't look back! 😅
+
+-   [Example Code](/.github/workflows/local-action.yml)
+-   [Example Pull Request]() - TODO: ADD LINK TO EXAMPLE PR
 
 ## Read and Use Node Version from .nvmrc File
 
