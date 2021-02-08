@@ -55,8 +55,8 @@ There has to be a better way... And now there is!
 
 The [calibreapp/image-actions](https://github.com/marketplace/actions/image-actions) GitHub Action abstracts all that setup and pain away with a single workflow. Set it and forget it and don't look back! 😅
 
--   [Example Code](/.github/workflows/local-action.yml)
--   TODO: ADD LINK TO EXAMPLE PR
+-   [Example Code](/.github/workflows/image-optimization.yml)
+-   [Example Pull Request](https://github.com/manovotny/github-actions-experiments/pull/13)
 
 ## Read and Use Node Version from .nvmrc File
 
