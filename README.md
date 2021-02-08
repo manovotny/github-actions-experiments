@@ -6,6 +6,8 @@ This repository contains snippets / recipes / guides or references to other acti
 
 Examples are isolated to keep them clear and concise, but you can [use them together into a single workflow](/.github/workflows/test.yml).
 
+You can also [view real results](https://github.com/manovotny/github-actions-experiments/actions) of the actions below, which are setup to run as realtime examples within this respiratory.
+
 -   [Cache node_modules](#cache-node_modules)
 -   [Cancel Running Workflows](#cancel-running-workflow)
 -   [GitHub Releases for Automated Package Publishing](#github-releases-for-automated-package-publishing)
@@ -19,7 +21,7 @@ One of the longest running steps in your GitHub Actions workflow is likely downl
 
 You totally can by saving previously installed dependencies and reusing them, if they haven't changed.
 
--   [Example](/.github/workflows/cache-node-modules.yml)
+-   [Example Code](/.github/workflows/cache-node-modules.yml)
 
 ## Cancel Running Workflows
 
@@ -33,7 +35,7 @@ There are so many ways to publish packages using GitHub Actions, but I found dra
 
 If publishing packages via GitHub Releases sounds appealing to you, check out [manovotny/github-releases-for-automated-package-publishing](https://github.com/marketplace/actions/github-releases-for-automated-package-publishing). It gives you a lot of flexibility in your workflow in how to publish your package.
 
--   [Example](/.github/workflows/local-action.yml)
+-   [Example Code](/.github/workflows/local-action.yml)
 
 ## Local Actions
 
@@ -41,8 +43,8 @@ Not all GitHub Actions need to be or should be published to the [GitHub Marketpl
 
 Fear not! You can write your own GitHub Action, locally within your project's repository, and reference it in workflows.
 
--   [Example: Creating a local action within your project repository](/.github/actions/local-action)
--   [Example: Referencing local action in your workflow](/.github/workflows/local-action.yml)
+-   [Example Code: Creating a local action within your project repository](/.github/actions/local-action)
+-   [Example Code: Referencing local action in your workflow](/.github/workflows/local-action.yml)
 
 ## Read and Use Node Version from .nvmrc File
 
@@ -50,7 +52,7 @@ Fear not! You can write your own GitHub Action, locally within your project's re
 
 You can! Have your GitHub Actions read and use the version specified in the project's `.nvmrc` file.
 
--   [Example](/.github/workflows/nvm.yml)
+-   [Example Code](/.github/workflows/nvm.yml)
 
 ## Read and Use Yarn Version from .yvmrc File
 
@@ -58,4 +60,4 @@ You can! Have your GitHub Actions read and use the version specified in the proj
 
 You can! Have your GitHub Actions read and use the version specified in the project's `.yvmrc` file.
 
--   [Example](/.github/workflows/yvm.yml)
+-   [Example Code](/.github/workflows/yvm.yml)
