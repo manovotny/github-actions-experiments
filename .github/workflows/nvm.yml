@@ -10,6 +10,6 @@ jobs:
               id: nvm
               run: echo "::set-output name=version::$(cat .nvmrc)"
             - name: Set node version
-              uses: actions/setup-node@v1
+              uses: actions/setup-node@v2
               with:
                   node-version: ${{ steps.nvm.outputs.version }}
